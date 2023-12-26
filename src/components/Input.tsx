@@ -11,7 +11,7 @@ interface InputProps {
 const isNumber = (e: React.KeyboardEvent) => {
   const number_regex = /^[0-9,]$/; // menerima comma, dan number
 
-  if (!number_regex.test(e.key)) {
+  if (!number_regex.test(e.key) && e.key !== "Backspace") {
     e.preventDefault();
   }
 };
@@ -25,7 +25,9 @@ const Input = (props: InputProps) => {
       value={value}
       onKeyDown={numbersOnly ? isNumber : () => {}}
       type={type}
-      className={"border rounded-md p-3 border-white/80 " + className}
+      className={
+        "border rounded-md p-3 border-white/80 bg-transparent " + className
+      }
     />
   );
 };
