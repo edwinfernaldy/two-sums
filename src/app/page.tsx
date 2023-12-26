@@ -11,7 +11,14 @@ export default function Home() {
 
   const [result, setResult] = useState("");
 
+  const [error, setError] = useState(false);
+
   const findNumbers = () => {
+    if (form.input_numbers === "" || form.target === 0) {
+      setError(true);
+      return;
+    }
+
     const numbers = form.input_numbers.split(",").map(Number);
     let flag = 0;
 
@@ -31,7 +38,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log(form);
+    setError(false);
   }, [form]);
 
   return (
@@ -99,6 +106,12 @@ export default function Home() {
             </h1>
           )}
         </div>
+      </div>
+
+      <div className='h-20'>
+        {error && (
+          <h1 className='font-bold text-2xl text-red-500'>Missing Input!!</h1>
+        )}
       </div>
     </main>
   );
